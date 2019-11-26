@@ -60,7 +60,7 @@ class CV extends React.Component {
                 <div>
                     {/*<Route exact path="/" component={SignUp} />*/}
                     {/*<Route exact path="/login" component={Login} />*/}
-                    <PrivateRoute exact path="/mainMenu" component={Company} userRoles={userRoles}
+                    <PrivateRoute exact path="/company" component={Company} userRoles={userRoles}
                                   allow={[RoleMapper.ADMIN, RoleMapper.BASIC_USER, RoleMapper.PREMIUM_USER]}/>
                     <Route
                         path="/login"
@@ -69,7 +69,7 @@ class CV extends React.Component {
                             AuthenticationService.isAuthenticated() ? (
                                 <Redirect
                                     to={{
-                                        pathname: '/mainMenu',
+                                        pathname: '/company',
                                         state: {from: props.location},
                                     }}
                                 />
@@ -85,7 +85,7 @@ class CV extends React.Component {
                             AuthenticationService.isAuthenticated() ? (
                                 <Redirect
                                     to={{
-                                        pathname: '/mainMenu',
+                                        pathname: '/company',
                                         state: {from: props.location},
                                     }}
                                 />

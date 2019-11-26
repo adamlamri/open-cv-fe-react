@@ -10,6 +10,16 @@ class LocalStorageManager {
     static clearAccessToken = () => {
         localStorage.clear();
     };
+
+
+    static getIsDrawerOpen = () => {
+        return localStorage.getItem('isDrawerOpen');
+    };
+
+    static toggleDrawer = () => {
+        const isDrawerOpen = this.getIsDrawerOpen() === 'true';
+        localStorage.setItem('isDrawerOpen', !isDrawerOpen);
+    }
 }
 
 export default LocalStorageManager;
