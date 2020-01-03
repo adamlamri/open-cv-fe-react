@@ -3,7 +3,7 @@ import axios from "axios";
 import Constant from "../constant/Constant";
 import LocalStorageManager from "../ulti/LocalStorageManager";
 
-class Request {
+class AxiosImpl {
 
     static sendRequest (config) {
         config.headers = {
@@ -36,6 +36,18 @@ class Request {
         }
         return this.sendRequest(config);
     }
+
+    static post(url, params, data) {
+        const config = {
+            method: 'post',
+            baseURL: Constant.BASE_URL,
+            url,
+            // params,
+            data,
+        };
+        console.log(config);
+        return this.sendRequest(config);
+    }
 }
 
-export default Request;
+export default AxiosImpl;

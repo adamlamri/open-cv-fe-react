@@ -14,7 +14,7 @@ import clsx from "clsx";
 import Drawer from "@material-ui/core/Drawer";
 import {MenuItem} from "./constant/DrawerItemConstant";
 import DrawerItem from "./component/DrawerItem";
-import {firstColorLevel1, firstColorLevel4} from "./constant/ColorConstant";
+import {firstColorLevel1, firstColorLevel7} from "./constant/ColorConstant";
 import LocalStorageManager from "./ulti/LocalStorageManager";
 import MenuIcon from "./component/MenuIcon";
 const drawerWidth = 200;
@@ -26,6 +26,7 @@ const useStyles = {
   },
   containerAppBar: {
     flexGrow: 1,
+    background: '#424242',
   },
   appBar: {
     background: '#424242',
@@ -33,11 +34,13 @@ const useStyles = {
       paddingLeft: 0,
     },
     boxShadow: 'none',
+    transition: 'all 0.25s',
   },
   appBarShift: {
     background: '#424242',
     marginLeft: 200,
     width: `calc(100% - ${drawerWidth}px)`,
+    transition: 'all 0.25s',
   },
   menuButton: {
     marginLeft: 0,
@@ -46,37 +49,41 @@ const useStyles = {
     flexGrow: 1,
   },
   root: {
-    background: firstColorLevel4,
+    background: firstColorLevel7,
   },
   container:{
     minHeight: '100vh',
-    background: firstColorLevel4,
+    background: firstColorLevel7,
     margin: 0,
     maxWidth: '100%',
-
+    transition: 'all 0.25s',
   },
   containerShift:{
     minHeight: '100vh',
     marginLeft: 200,
     width: `calc(100% - ${drawerWidth}px)`,
+    transition: 'all 0.25s',
   },
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    transition: 'margin 0.25s',
   },
   drawerPaper: {
     width: drawerWidth,
     background: firstColorLevel1,
     border: '0',
     color: '#ffffff',
+    transition: 'transform 0.25s !important',
   },
   drawerHeader: {
     width: drawerWidth,
-    background: '#424242',
+    background: firstColorLevel1,
     height: 64,
     alignItems: 'center',
     display: 'flex',
     boxShadow: ` 0px 2px 4px -1px rgba(0,0,0,0.2), 0px 4px 5px 0px rgba(0,0,0,0.14), 0px 1px 10px 0px rgba(0,0,0,0.12)`,
+    transition: 'all 0.25s',
   },
   titleDrawerHeader: {
     fontSize: '1.6rem',
@@ -119,6 +126,7 @@ class MotherContainer extends React.Component{
     return Object.keys(MenuItem).filter(id => id !== 'PROFILE').map(menuItemId => {
       let menuItem = MenuItem[menuItemId];
       return(<DrawerItem
+                key={menuItemId}
                 item={menuItem}
                 isChosen= {this.state.chosenMenuId === menuItem.id}
                 onClick = {this.handleMenuChange(menuItem.id)}
@@ -128,7 +136,6 @@ class MotherContainer extends React.Component{
   }
 
   componentDidMount() {
-    console.log('lola');
     this.setRole();
   }
 
@@ -136,8 +143,8 @@ class MotherContainer extends React.Component{
     if (AuthenticationService.isAuthenticated()) {
       await UserService.getCurrentUserDetail()
               .then(res => {
+                console.log(res);
                 if (res.data && res.data.roleNames && res.data.roleNames.length > 0) {
-
                   this.setState({ userRoles: res.data.roleNames, user: res.data});
                 } else {
                   this.setState({ userRoles: [], user: res.data });

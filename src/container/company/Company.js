@@ -3,7 +3,8 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import withStyles from "@material-ui/core/styles/withStyles";
 import Validator, {IS_EMAIL, MAX_LENGTH, REQUIRED} from "../../ulti/Validator";
-import LoginService from "../../service/LoginService";
+import CreateCompany from "./CreateCompany";
+import CompanyTable from "./CompanyTable";
 
 const styles = {
     '@global': {
@@ -34,29 +35,29 @@ class Company extends React.Component<> {
         super(props);
 
         this.validator = new Validator(
-                {
-                    firstName: [
-                        REQUIRED,
-                        MAX_LENGTH
-                    ],
-                    lastName: [
-                        REQUIRED,
-                        MAX_LENGTH
-                    ],
-                    userName: [
-                        REQUIRED,
-                        MAX_LENGTH,
-                    ],
-                    email: [
-                        REQUIRED,
-                        IS_EMAIL,
-                        MAX_LENGTH
-                    ],
-                    password: [
-                        REQUIRED,
-                        MAX_LENGTH,
-                    ]
-                }
+            {
+                firstName: [
+                    REQUIRED,
+                    MAX_LENGTH
+                ],
+                lastName: [
+                    REQUIRED,
+                    MAX_LENGTH
+                ],
+                userName: [
+                    REQUIRED,
+                    MAX_LENGTH,
+                ],
+                email: [
+                    REQUIRED,
+                    IS_EMAIL,
+                    MAX_LENGTH
+                ],
+                password: [
+                    REQUIRED,
+                    MAX_LENGTH,
+                ]
+            }
         );
         this.state = {
             loginForm: {
@@ -75,14 +76,14 @@ class Company extends React.Component<> {
 
     copyright = () => {
         return (
-                <Typography variant="body2" color="textSecondary" align="center">
-                    {'Copyright © '}
-                    <Link color="inherit" href="https://material-ui.com/">
-                        Your Website
-                    </Link>{' '}
-                    {new Date().getFullYear()}
-                    {'.'}
-                </Typography>
+            <Typography variant="body2" color="textSecondary" align="center">
+                {'Copyright © '}
+                <Link color="inherit" href="https://material-ui.com/">
+                    Your Website
+                </Link>{' '}
+                {new Date().getFullYear()}
+                {'.'}
+            </Typography>
         );
     }
 
@@ -101,29 +102,6 @@ class Company extends React.Component<> {
         }
     }
 
-    handleSubmitLoginForm = async () => {
-        const {loginForm} = this.state;
-        const allFieldsValid = this.validator.validate(loginForm);
-
-        if (allFieldsValid) {
-            const signUp = await LoginService.signUp({
-                userName: loginForm.userName,
-                password: loginForm.password,
-                firstName: loginForm.firstName,
-                lastName: loginForm.lastName,
-                email: loginForm.email,
-
-            });
-            if(signUp && signUp.status === 200) {
-                window.location = "login"
-            } else {
-                this.setState({errorMessage: 'Cannot sign up. Please try agian'})
-            }
-        }
-        else {
-            this.setState({validationResult: this.validator.getValidationResult()});
-        }
-    }
 
     render() {
         const {classes} = this.props;
@@ -139,13 +117,14 @@ class Company extends React.Component<> {
 
         const validationResultOfFields = state.validationResult.resultOfFields;
         return (
-                <div>
+            <div>
 
-                        <Typography component="h1" variant="h5" className={classes.title}>
-                            Company
-                        </Typography>
-
-                </div>);
+                <Typography component="h1" variant="h5" className={classes.title}>
+                    Company
+                </Typography>
+                <CreateCompany/>
+                <CompanyTable/>
+            </div>);
     }
 }
 

@@ -5,12 +5,10 @@ import Avatar from "@material-ui/core/Avatar";
 import LockOutlinedIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import withStyles from "@material-ui/core/styles/withStyles";
-import Validator, {IS_EMAIL, MAX_LENGTH, REQUIRED} from "../../ulti/Validator";
+import Validator, {MAX_LENGTH, REQUIRED} from "../../ulti/Validator";
 import LoginService from "../../service/LoginService";
 import LocalStorageManager from "../../ulti/LocalStorageManager";
 
@@ -43,16 +41,16 @@ class SignUp extends React.Component<> {
         super(props);
 
         this.validator = new Validator(
-                {
-                    userName: [
-                        REQUIRED,
-                        MAX_LENGTH,
-                    ],
-                    password: [
-                        REQUIRED,
-                        MAX_LENGTH,
-                    ]
-                }
+            {
+                userName: [
+                    REQUIRED,
+                    MAX_LENGTH,
+                ],
+                password: [
+                    REQUIRED,
+                    MAX_LENGTH,
+                ]
+            }
         );
         this.state = {
             loginForm: {
@@ -61,21 +59,21 @@ class SignUp extends React.Component<> {
             },
             errorMessage: '',
             validationResult: this.validator.getValidationResult(),
-    }
+        }
 
 
     }
 
     copyright = () => {
         return (
-                <Typography variant="body2" color="textSecondary" align="center">
-                    {'Copyright © '}
-                    <Link color="inherit" href="https://material-ui.com/">
-                        Your Website
-                    </Link>{' '}
-                    {new Date().getFullYear()}
-                    {'.'}
-                </Typography>
+            <Typography variant="body2" color="textSecondary" align="center">
+                {'Copyright © '}
+                <Link color="inherit" href="https://material-ui.com/">
+                    Your Website
+                </Link>{' '}
+                {new Date().getFullYear()}
+                {'.'}
+            </Typography>
         );
     }
 
@@ -105,14 +103,13 @@ class SignUp extends React.Component<> {
                 password: loginForm.password,
 
             });
-            if(login && login.status === 200) {
+            if (login && login.status === 200) {
                 LocalStorageManager.setAccessToken(login.data.access_token)
                 window.location = "mainMenu"
             } else {
                 this.setState({errorMessage: 'Cannot login. Please try again'})
             }
-        }
-        else {
+        } else {
             this.setState({validationResult: this.validator.getValidationResult()});
         }
     }
@@ -128,70 +125,69 @@ class SignUp extends React.Component<> {
 
         const validationResultOfFields = state.validationResult.resultOfFields;
         return (
-                <div>
-                    <div className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon/>
-                        </Avatar>
-                        <Typography component="h1" variant="h5" className={classes.title}>
-                            Login
-                        </Typography>
-                        <div className={classes.form}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <TextField
-                                            variant="outlined"
-                                            required
-                                            fullWidth
-                                            id="userName"
-                                            label="User Name"
-                                            name="userName"
-                                            onChange={this.handleTextFieldChange(fieldNames.userName)}
-                                            error={!validationResultOfFields[fieldNames.userName].isValid}
-                                            helperText={validationResultOfFields[fieldNames.userName].errorMessage}
-                                    />
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField
-                                            variant="outlined"
-                                            required
-                                            fullWidth
-                                            name="password"
-                                            label="Password"
-                                            type="password"
-                                            id="password"
-                                            autoComplete="current-password"
-                                            helperText="123"
-                                            onChange={this.handleTextFieldChange(fieldNames.password)}
-                                            error={!validationResultOfFields[fieldNames.password].isValid}
-                                            helperText={validationResultOfFields[fieldNames.password].errorMessage}
-                                    />
-                                </Grid>
-                            </Grid>
-                            {state.errorMessage}
-                            <Button
-                                    type="submit"
+            <div>
+                <div className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon/>
+                    </Avatar>
+                    <Typography component="h1" variant="h5" className={classes.title}>
+                        Login
+                    </Typography>
+                    <div className={classes.form}>
+                        <Grid container spacing={2}>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
                                     fullWidth
-                                    variant="contained"
-                                    color="primary"
-                                    className={classes.submit}
-                                    onClick={this.handleSubmitLoginForm}
-                            >
-                                Login
-                            </Button>
-                            <Grid container justify="flex-end">
-                                <Grid item>
-                                    <Link href="/" variant="body2">
-                                        Don't have an account? Sign up
-                                    </Link>
-                                </Grid>
+                                    id="userName"
+                                    label="User Name"
+                                    name="userName"
+                                    onChange={this.handleTextFieldChange(fieldNames.userName)}
+                                    error={!validationResultOfFields[fieldNames.userName].isValid}
+                                    helperText={validationResultOfFields[fieldNames.userName].errorMessage}
+                                />
                             </Grid>
-                        </div>
+                            <Grid item xs={12}>
+                                <TextField
+                                    variant="outlined"
+                                    required
+                                    fullWidth
+                                    name="password"
+                                    label="Password"
+                                    type="password"
+                                    id="password"
+                                    autoComplete="current-password"
+                                    onChange={this.handleTextFieldChange(fieldNames.password)}
+                                    error={!validationResultOfFields[fieldNames.password].isValid}
+                                    helperText={validationResultOfFields[fieldNames.password].errorMessage}
+                                />
+                            </Grid>
+                        </Grid>
+                        {state.errorMessage}
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={this.handleSubmitLoginForm}
+                        >
+                            Login
+                        </Button>
+                        <Grid container justify="flex-end">
+                            <Grid item>
+                                <Link href="/" variant="body2">
+                                    Don't have an account? Sign up
+                                </Link>
+                            </Grid>
+                        </Grid>
                     </div>
-                    <Box mt={5}>
-                        {this.copyright}
-                    </Box>
-                </div>);
+                </div>
+                <Box mt={5}>
+                    {this.copyright}
+                </Box>
+            </div>);
     }
 }
 

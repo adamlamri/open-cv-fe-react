@@ -1,7 +1,7 @@
 import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import clsx from "clsx";
-import {firstColorLevel1, firstColorLevel2, firstColorLevel3, firstColorLevel4} from "../constant/ColorConstant";
+import {firstColorLevel1, firstColorLevel3, firstColorLevel7} from "../constant/ColorConstant";
 import Icon from "./MenuIcon";
 
 const useStyles = {
@@ -17,7 +17,7 @@ const useStyles = {
 
 
     },
-    containerLeft:{
+    containerLeft: {
         margin: '5px 0 0 0',
         "&:hover": {
             //you want this to be the same as the backgroundColor above
@@ -39,11 +39,11 @@ const useStyles = {
     },
     containerSelected: {
         border: 0,
-        background: firstColorLevel4,
+        background: firstColorLevel7,
         color: '#000000',
         "&:hover": {
             //you want this to be the same as the backgroundColor above
-            backgroundColor: firstColorLevel4
+            backgroundColor: firstColorLevel7
         },
     },
     containerSelectedLeft: {
@@ -104,11 +104,13 @@ class DrawerItem extends React.Component<> {
         const iconSrc = isChosen ? item.iconSelectedUrl : item.iconUrl;
         const iconFill = isChosen ? firstColorLevel1 : '#ffffff';
         return (
-            <div className={clsx(classes.container,containerPositionClass, {[containerPositionSelectedClass]: isChosen}, {[classes.containerSelected]: isChosen})} onClick={this.props.onClick}>
+            <div
+                className={clsx(classes.container, containerPositionClass, {[containerPositionSelectedClass]: isChosen}, {[classes.containerSelected]: isChosen})}
+                onClick={this.props.onClick}>
                 <div className={classes.iconContainer}>
                     <Icon fill={iconFill} id={item.id}/>
                 </div>
-                <div className={clsx(classes.textContainer,textContainerPositionClass)}>
+                <div className={clsx(classes.textContainer, textContainerPositionClass)}>
                     <span className={classes.text}>{item.name}</span>
                 </div>
             </div>

@@ -74,7 +74,7 @@ class SignUp extends React.Component<> {
                 email: '',
                 password: '',
             },
-            erroMessage: '',
+            errorMessage: '',
             validationResult: this.validator.getValidationResult(),
         }
 
@@ -219,7 +219,6 @@ class SignUp extends React.Component<> {
                                     type="password"
                                     id="password"
                                     autoComplete="current-password"
-                                    helperText="123"
                                     onChange={this.handleTextFieldChange(fieldNames.password)}
                                     error={!validationResultOfFields[fieldNames.password].isValid}
                                     helperText={validationResultOfFields[fieldNames.password].errorMessage}

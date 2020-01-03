@@ -14,12 +14,12 @@ class AuthenticationService {
         params.append('grant_type', 'password');
 
         const url = `${BASE_URL}oauth/token`,
-                axiosInstance = axios.create({
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                        Authorization: Constant.BASIC_TOKEN,
-                    },
-                });
+            axiosInstance = axios.create({
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    Authorization: Constant.BASIC_TOKEN,
+                },
+            });
         return axiosInstance.post(url, params);
     }
 
@@ -28,7 +28,7 @@ class AuthenticationService {
     }
 
     static hasRole(userRoles, roles) {
-        if (!userRoles || userRoles.length == 0 || !roles || roles.length == 0)
+        if (!userRoles || userRoles.length === 0 || !roles || roles.length === 0)
             return false;
         else
             return userRoles.some(userRole => {
