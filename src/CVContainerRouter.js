@@ -7,6 +7,8 @@ import SignUp from "./container/login/SignUp";
 import Company from "./container/company/Company";
 import AuthenticationService from "./service/AuthenticationService";
 import {RoleMapper} from "./ulti/RoleMapper";
+import Candidate from "./container/candidate/Candidate";
+import CandidateDetails from "./container/candidate/CandidateDetails";
 
 const PrivateRoute = ({component: Component, userRoles, allow, ...rest}) => {
     if (AuthenticationService.isAuthenticated()) {
@@ -61,6 +63,10 @@ class CV extends React.Component {
                     {/*<Route exact path="/" component={SignUp} />*/}
                     {/*<Route exact path="/login" component={Login} />*/}
                     <PrivateRoute exact path="/company" component={Company} userRoles={userRoles}
+                                  allow={[RoleMapper.ADMIN, RoleMapper.BASIC_USER, RoleMapper.PREMIUM_USER]}/>
+                    <PrivateRoute exact path="/candidate" component={Candidate} userRoles={userRoles}
+                                  allow={[RoleMapper.ADMIN, RoleMapper.BASIC_USER, RoleMapper.PREMIUM_USER]}/>
+                    <PrivateRoute exact path="/candidate/:id" component={CandidateDetails} userRoles={userRoles}
                                   allow={[RoleMapper.ADMIN, RoleMapper.BASIC_USER, RoleMapper.PREMIUM_USER]}/>
                     <Route
                         path="/login"

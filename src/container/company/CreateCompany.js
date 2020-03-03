@@ -9,10 +9,11 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import CountryService from "../../service/country/CountryService";
 import CompanyService from "../../service/company/CompanyService";
 import AddressSupportService from "../../service/country/AddressSupportService";
+import CountrySelect from "../../component/CountrySelect";
 
 const marginTop = '5px';
 
-const usestyles = {
+const useStyles = {
     container: {
         width: '50%',
         minWidth: '300px',
@@ -87,14 +88,6 @@ class CreateCompany extends React.Component<> {
             }
         })
             .catch(e => console.log(e));
-    }
-
-    openDialog = () => {
-        this.setState({isDialogOpen: true});
-    }
-
-    closeDialog = () => {
-        this.setState({isDialogOpen: false});
     }
 
     handleCreateButtonClick = () => {
@@ -234,28 +227,18 @@ class CreateCompany extends React.Component<> {
                 <TextBoxButton activeButton={state.companyName}
                                onClick={this.handleCreateButtonClick}
                                onTextChange={this.handleCompanyNameChange}
-                               value={state.companyName}/>
-                <div open={state.isDialogOpen} onClose={this.closeDialog} aria-labelledby="form-dialog-title"
+                               value={state.companyName}
+                               label="Create new company"
+                               icon='company'/>
+                <div aria-labelledby="form-dialog-title"
                      className={clsx(classes.main, {[classes.mainOpen]: state.companyName})}>
                     <div className={classes.mainCenter}>
                         <div className={classes.fieldContainer}>
+                            <CountrySelect selectedCountryIso={state.selectedCountryIso}
+                                           onCountryChange={this.handleCountryChanged}
+                            >
 
-                            <FormControl className={classes.fieldMarginTop}>
-                                <InputLabel htmlFor="age-native-simple">Country</InputLabel>
-                                <Select
-                                    native
-                                    value={state.selectedCountryIso}
-                                    onChange={this.handleCountryChanged}
-                                    inputProps={{
-                                        name: 'Country',
-                                        id: 'age-native-simple',
-                                    }}
-                                >
-                                    <option/>
-                                    {this.countrySelect()}
-                                </Select>
-                            </FormControl>
-
+                            </CountrySelect>
                             <div className={classes.addressSupport}>
                                 <FormControl className={classes.addressSupportElement}>
                                     <InputLabel htmlFor="age-native-simple">Province/City</InputLabel>
@@ -335,4 +318,4 @@ class CreateCompany extends React.Component<> {
     }
 }
 
-export default withStyles(usestyles)(CreateCompany);
+export default withStyles(useStyles)(CreateCompany);

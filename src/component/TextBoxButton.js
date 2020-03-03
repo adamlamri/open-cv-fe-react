@@ -57,20 +57,19 @@ class TextBoxButton extends React.Component<> {
 
     render() {
 
-        const {classes, onClick, onTextChange, activeButton, value} = this.props;
-
+        const {classes, label, onClick, onTextChange, activeButton, value, icon} = this.props;
         return (
             <div className={classes.container}>
                 <TextField
                     className={classes.textFieldContainer}
                     id="input-with-icon-textfield"
-                    label="Create new company"
+                    label={label || 'Create'}
                     onChange={onTextChange}
                     value={value}
                     InputProps={{
                         startAdornment: (
                             <InputAdornment position="start">
-                                <MenuIcon id={'company'} width={'30px'} style={{margin: 0}} />
+                                <MenuIcon id={icon} width={'30px'} style={{margin: 0}} />
                             </InputAdornment>
                         ),
                     }}

@@ -119,9 +119,9 @@ class Company extends React.Component<> {
         return (
             <div>
 
-                <Typography component="h1" variant="h5" className={classes.title}>
+                <h1>
                     Company
-                </Typography>
+                </h1>
                 <CreateCompany/>
                 <CompanyTable/>
             </div>);

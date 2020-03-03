@@ -50,6 +50,7 @@ const useStyles = {
   },
   root: {
     background: firstColorLevel7,
+    color: firstColorLevel1,
   },
   container:{
     minHeight: '100vh',
@@ -97,7 +98,8 @@ class MotherContainer extends React.Component{
 
   constructor(props) {
     super(props);
-    const menuId = window.location.pathname.substring(1);
+    const menuId = window.location.pathname.substring(1).split('/')[0];
+    console.log(window.location.pathname);
     const isDrawerOpen = LocalStorageManager.getIsDrawerOpen() === 'true';
     this.state = {
       userRoles: [],
@@ -119,7 +121,7 @@ class MotherContainer extends React.Component{
     }
     this.setState({chosenMenuId: menuId});
     console.log("after");
-    window.location = `${menuId}`;
+    window.location = `/${menuId}`;
   }
 
   menu = () => {
