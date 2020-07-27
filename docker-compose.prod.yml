@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+
+  nginx-with-react:
+    container_name: nginx-with-react
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - '3000:80'
