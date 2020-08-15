@@ -2,7 +2,6 @@ import axios from 'axios';
 import Constant from "../constant/Constant";
 import LocalStorageManager from "../ulti/LocalStorageManager";
 
-const BASE_URL = 'http://localhost:8080/';
 
 
 class AuthenticationService {
@@ -13,7 +12,7 @@ class AuthenticationService {
         params.append('password', user.password);
         params.append('grant_type', 'password');
 
-        const url = `${BASE_URL}oauth/token`,
+        const url = `${Constant.BASE_URL}oauth/token`,
             axiosInstance = axios.create({
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',

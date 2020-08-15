@@ -111,6 +111,8 @@ class CompanyTable extends React.Component<>{
             companies = res.data;
             this.setState({companies: companies})
         }).catch(error => {
+            companies = JSON.parse("Chuỗi String companies");
+            this.setState({companies: companies});
             console.log(error);
         });
     }

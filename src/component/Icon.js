@@ -1,5 +1,4 @@
 import React from "react";
-import {MenuItem} from "../constant/DrawerItemConstant";
 import {IconConstants} from "../constant/IconConstant";
 
 const Icon = ({
